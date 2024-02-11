@@ -24,20 +24,20 @@ public:
 		ImGui::End();
 
 		//Window: Displays rendered scene
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 		ImGui::Begin("Scene");
 		
-			sceneWidth = ImGui::GetContentRegionAvail().y;//x and y are flipped?
-			sceneHeight = ImGui::GetContentRegionAvail().x;
+			sceneWidth = ImGui::GetContentRegionAvail().x;
+			sceneHeight = ImGui::GetContentRegionAvail().y;
 
 			auto image = renderer.GetFinal();
 
 			if (image) 
 			{
-				ImGui::Image(image->GetDescriptorSet(), { (float)image->GetHeight(), (float)image->GetWidth() });
+				ImGui::Image(image->GetDescriptorSet(), { (float)image->GetWidth(), (float)image->GetHeight() }, ImVec2(0,1), ImVec2(1,0));
 			}
+			Render();//Creates Image
 
-			Render();
 		ImGui::End();
 		ImGui::PopStyleVar();
 	}
